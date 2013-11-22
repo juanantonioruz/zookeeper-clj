@@ -74,4 +74,3 @@
 (defn to-char
   ([bytes]
      (.getChar (ByteBuffer/wrap bytes))))
-

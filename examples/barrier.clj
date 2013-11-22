@@ -2,6 +2,20 @@
   (:require [zookeeper :as zk])
   (:import (java.net InetAddress)))
 
+
+(comment  [(+ (* 10 i) j) [1 4] [1 3]])
+(comment [[11 12 13] [21 22 23] [31 32 33] [41 42 43]])
+
+(defn your-fn [[ra1 ra2] [rb1 rb2] the-fn]
+  (vec (map (fn [i] (vec (map (fn [j] (the-fn i j)) (range rb1 (inc rb2))))) (range ra1 (inc ra2))))
+  )
+(your-fn [1 4] [1 3] (fn [i j] (+ (* 10 i) j)))
+((fn [[ra1 ra2] [rb1 rb2]]
+   (letfn [(map-fn [it] (vec (map (fn [j] (+ (* 10 it) j)) (range rb1 (inc rb2)))))]
+    (vec (map map-fn (range ra1 (inc ra2)))))
+
+   ) [1 4] [1 3])
+
 (defn exit-barrier
   ([client & {:keys [barrier-node proc-name]
               :or {barrier-node "/barrier"

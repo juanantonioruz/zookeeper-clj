@@ -16,3 +16,4 @@
   (do (zk/create client (str group-name "/" name))
       (zk/children client group-name :watcher group-watcher)))
 
+(comment zk/connect )
